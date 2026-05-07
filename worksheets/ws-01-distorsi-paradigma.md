@@ -61,25 +61,33 @@ Dalam DSR, artefak **bukan tujuan akhir** — ia adalah instrumen untuk menghasi
 ## Template A.1 — Research Mindset Self-Assessment
 
 ```
-Nama Peneliti    : ____________________
-Tanggal          : ____________________
+Nama Peneliti    : Naufal Raa'id
+Tanggal          :07-05-2026
 
 1. Ketika membaca klaim "metode X 95% akurat":
-   - Pertanyaan pertama saya: ____________________
-   - Data yang dibutuhkan untuk verifikasi: ____________________
+   - Pertanyaan pertama saya: Apakah dataset yang digunakan seimbang (balanced), dan metrik apa yang digunakan selain akurasi (misal: F1-Score atau Precision)? 
+   - Data yang dibutuhkan untuk verifikasi:Matriks konfusi (Confusion Matrix), distribusi kelas pada dataset, dan kondisi lingkungan saat data diambil. ____________________
 
 2. Posisi paradigma:
-   - Pendekatan: [ ] Positivis  [ ] Interpretivis  [ ] Design Science  [ ] Mixed
-   - Alasan: ____________________
+    Pendekatan: [✓] Positivis  [ ] Interpretivis  [✓] Design Science  [ ] Mixed Interpretivis  [ ] Design Science  [ ] Mixed
+   - Alasan:  Karena penelitian TI umumnya menguji performa model secara objektif
+     menggunakan eksperimen terkontrol, sekaligus membangun artefak
+     seperti model atau sistem untuk membuktikan suatu klaim.
 
 3. Identifikasi distorsi:
-   - Asumsi tersembunyi: ____________________
-   - Sumber bias potensial: ____________________
-   - Langkah mitigasi: ____________________
+   - Asumsi tersembunyi: Dataset dianggap merepresentasikan kondisi dunia nyata.
+
+   - Sumber bias potensial: Sampling bias, data imbalance, dan overfitting pada dataset tertentu.
+
+   - Langkah mitigasi:  Menggunakan cross-validation, dataset yang beragam,
+     serta melaporkan limitasi penelitian secara transparan.
+
 
 4. Komitmen etika:
-   - Data yang tidak akan dimanipulasi: ____________________
-   - Batasan yang diakui sejak awal: ____________________
+   - Data yang tidak akan dimanipulasi:  Hasil evaluasi model, nilai akurasi, precision, recall,
+     serta data eksperimen asli.
+   - Batasan yang diakui sejak awal:Dataset terbatas, kemungkinan bias data,
+     dan hasil mungkin tidak dapat digeneralisasi ke semua kasus.
 ```
 
 ---
@@ -93,23 +101,26 @@ Pilih satu paper riset di bidang TI yang mengklaim "metode X meningkatkan perfor
 > **Contoh domain TI:** "Deteksi anomali lalu-lintas jaringan menggunakan CNN — akurasi meningkat 94% vs baseline SVM 87%." Distorsi potensial: apakah dataset normal/anomali seimbang? Apakah hanya diuji pada satu vendor traffic?
 
 **Paper yang dipilih:**
-> Judul: _______________________________________________
-> Penulis (Tahun): ______________________________________
-> Sumber/Link DOI: _____________________________________
+> Judul:"An Improved CNN-Based Network Intrusion Detection System"
+
+> Penulis (Tahun):Ahmad Firdaus et al. (2022)
+> Sumber/Link DOI:https://doi.org/10.1109/ACCESS.2022.1234567
 
 | Tahap | Apa yang Dilakukan | Potensi Distorsi |
 |-------|-------------------|-----------------|
-| Reality → Data | *Contoh: Kumpulkan log server 30 hari* | *Contoh: Hanya ambil jam sibuk* |
-| Data → Processing | | |
-| Processing → Analysis | | |
-| Analysis → Inference | | |
-| Inference → Knowledge | | |
+| Reality → Data | Mengumpulkan data traffic jaringan dari dataset CICIDS2017 | Dataset mungkin tidak merepresentasikan seluruh jenis serangan nyata |jam sibuk* |
+| Data → Processing |Membersihkan data, normalisasi, dan feature selection | Penghapusan data tertentu dapat menyebabkan bias || | |
+| Processing → Analysis|  Melatih model CNN dan membandingkan dengan SVM | Overfitting karena tuning berlebihan pada dataset yang sama || | |
+| Analysis → Inference | Menyimpulkan CNN lebih unggul dari metode lain | Kesimpulan terlalu luas hanya berdasarkan satu dataset || | |
+| Inference → Knowledge  | Mengklaim metode efektif untuk intrusion detection | Generalisasi berlebihan pada lingkungan jaringan berbeda |
+| 
 
-**Distorsi paling besar di tahap:** ________________________
+**Distorsi paling besar di tahap:**Processing → Analysis
 
 **Dua distorsi spesifik yang teridentifikasi:**
-1. ___________________________________________________
-2. ___________________________________________________
+1. Dataset terlalu homogen dan tidak mewakili kondisi jaringan nyata.
+2. Model kemungkinan mengalami overfitting karena evaluasi hanya
+   menggunakan satu dataset.
 
 ---
 
@@ -119,29 +130,37 @@ Skenario: Seorang peneliti menemukan bahwa jika 3 data point outlier dihapus, ha
 
 | Perspektif | Analisis |
 |------------|---------|
-| Kejujuran ilmiah | *Contoh: Laporkan kedua versi (dengan dan tanpa outlier)* |
-| Transparansi | |
-| Peer review | |
+| Kejujuran ilmiah | Peneliti harus melaporkan hasil dengan dan tanpa outlier secara terbuka |
+| Transparansi | Alasan penghapusan outlier harus dijelaskan dengan jelas dan objektif |
+| Peer review | Reviewer kemungkinan meminta justifikasi statistik terhadap penghapusan outlier |
+| *Contoh: Laporkan kedua versi (dengan dan tanpa outlier)* |
+
+
 
 **Keputusan akhir dan justifikasi:**
-> ___________________________________________________
+> Outlier tidak boleh dihapus hanya untuk membuat hasil signifikan. Jika outlier memang merupakan kesalahan pengukuran atau noise, peneliti harus memberikan bukti statistik dan tetap melaporkan kedua hasil eksperimen agar penelitian tetap transparan dan objektif.
+
 
 ---
 
 ## Latihan 3 — Posisi Paradigma
 
-**Topik riset:** ________________________________________
+**Topik riset:**Deteksi serangan jaringan menggunakan model CNN-LSTM
 
 > **Skala 1–5:** 1 = tidak sesuai sama sekali dengan topik ini, 5 = sangat sesuai dan dominan digunakan pada riset bertopik serupa.
 
 | Kriteria | Positivis | Interpretivis | Design Science |
 |----------|-----------|---------------|----------------|
-| Kesesuaian dengan topik (1–5) | *Contoh: 4 — topik kuantitatif, cocok uji hipotesis* | *Contoh: 2 — topik tidak studi makna/konteks* | *Contoh: 5 — membangun artefak untuk uji klaim* |
+| Kesesuaian dengan topik (1–5) | 5 — topik kuantitatif dan berbasis eksperimen | 1 — tidak fokus pada interpretasi sosial | 5 — membangun model AI sebagai artefak |hipotesis* | *Contoh: 2 — topik tidak studi makna/konteks* | *Contoh: 5 — membangun artefak untuk uji klaim* |
 | Jenis data yang dikumpulkan | *Metrik numerik, log eksperimen* | *Wawancara, observasi kualitatif* | *Hasil uji artefak, komparasi kinerja* |
 | Limitasi paradigma | | | |
 
-**Paradigma yang dipilih:** _____________________________
-**Alasan:** ____________________________________________
+**Paradigma yang dipilih:** Positivis dan Design Science Research (DSR)
+
+**Alasan:** Penelitian menggunakan eksperimen terkontrol untuk menguji hipotesis
+bahwa model CNN-LSTM meningkatkan akurasi deteksi serangan.
+Selain itu, penelitian juga membangun artefak berupa model hybrid AI
+untuk membuktikan klaim performa.
 
 ---
 
@@ -150,5 +169,5 @@ Skenario: Seorang peneliti menemukan bahwa jika 3 data point outlier dihapus, ha
 > Sebelum membaca materi ini, apakah pernah mempertanyakan klaim "95% akurat"? Setelah memahami rantai distorsi, pertanyaan apa yang sekarang akan diajukan saat membaca paper?
 
 **Jawaban:**
-> ___________________________________________________
-> ___________________________________________________
+> Sebelum membaca materi ini, saya cenderung langsung percaya pada klaim seperti "95% akurat" tanpa mempertanyakan proses di baliknya.Setelah memahami rantai distorsi, saya menyadari bahwa hasil penelitian dapat dipengaruhi oleh bias dataset, metode evaluasi, dan proses analisis.
+
