@@ -171,8 +171,8 @@ Pilih 2 baseline dari literatur yang sudah dibaca.
 
 | # | Baseline | Mengapa Relevan | Mengapa Representatif | Apakah SOTA? | Sumber |
 |---|----------|----------------|----------------------|-------------|--------|
-| 1 | *ESP32 + Ultrasonic Sensor* | *Sama-sama digunakan untuk monitoring dan pemilahan sampah berbasis IoT* | *Dipakai 6 dari 10 paper* | *Bukan, tapi common practice* | *Lee et al., 2022* |
-| 2 | | | | | |
+| 1 | *ESP32 + Ultrasonic Sensor* | *Sama-sama digunakan untuk monitoring dan pemilahan sampah berbasis IoT* | *Banyak dipakai pada penelitian smart bin berbasis ESP32* | *Bukan, tapi common practice* | *Putra et al., 2024* |
+| 2 | CNN Waste Classification|Sama-sama melakukan klasifikasi sampah otomatis |Menjadi metode umum pada penelitian AI smart waste sorting |Ya | White et al., 2020|
 
 **Apakah pemilihan baseline ini bisa dianggap straw man?** [ ✔] Ya / [ ] Tidak
 > Justifikasi: Baseline dipilih dari dua pendekatan utama pada literatur, yaitu sistem IoT low-cost dan sistem AI state-of-the-art sehingga perbandingan tetap adil dan relevan.
@@ -184,5 +184,5 @@ Pilih 2 baseline dari literatur yang sudah dibaca.
 > Apa perbedaan antara "belum ada yang meneliti ini" (klaim tanpa bukti) dengan research gap yang valid? Bagaimana cara membuktikan bahwa sebuah gap benar-benar ada?
 
 **Jawaban:**
-> ___________________________________________________
-> ___________________________________________________
+> “Belum ada yang meneliti ini” hanyalah asumsi jika tidak didukung pencarian literatur yang jelas. Sedangkan research gap yang valid harus dibuktikan melalui analisis beberapa penelitian sebelumnya untuk menemukan kekurangan, limitasi, atau masalah yang belum terselesaikan.
+> Gap dapat dibuktikan dengan melakukan pencarian sistematis pada database akademik, membandingkan metode dan hasil penelitian terdahulu, lalu menunjukkan pola kelemahan yang berulang, misalnya akurasi rendah, penggunaan metode yang terbatas, dataset kecil, atau belum diterapkan pada konteks tertentu.
