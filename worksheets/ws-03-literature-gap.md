@@ -77,11 +77,11 @@ Membandingkan deep learning 2024 dengan decision tree sederhana tanpa justifikas
 ```
 LITERATURE MAPPING
 
-Topik      : ____________________
-Database   : ____________________
-Query      : ____________________
-Tahun      : ____________________
-Hasil awal : ____ paper → Screening → ____ paper final
+Topik      : Sistem Pemilahan Sampah Anorganik Berbasis ESP32 Menggunakan Sensor Multivariable dengan Notifikasi Real-Time via Telegram
+Database   : Google Scholar, IEEE Xplore, ResearchGate
+Query      : ("smart waste sorting" OR "automatic waste classification") AND ("ESP32" OR "IoT") AND ("sensor" OR "multisensor") AND ("Telegram notification")
+Tahun      : 2020–2025
+Hasil awal : 28 paper → Screening → 5 paper final
 
 Literature Matrix (concept-centric):
 
@@ -90,26 +90,29 @@ Literature Matrix (concept-centric):
 |       |       |        |      |        |            |
 
 Pola yang ditemukan:
-  Metode dominan     : ____________________
-  Dataset umum       : ____________________
-  Limitasi berulang  : ____________________
+  Metode dominan     : ESP32/ESP8266 berbasis IoT
+  Dataset umum       :Prototype laboratorium
+  Limitasi berulang  :Belum banyak sistem multisensor
 
 GAP IDENTIFICATION
 
 Gap 1: [Jenis: performance / method / data / context]
-  Deskripsi    : ____________________
-  Bukti        : ____________________
-  Signifikansi : ____________________
+  Deskripsi    : Sebagian besar penelitian hanya menggunakan satu sensor atau hanya monitoring kapasitas tanpa klasifikasi berbasis multisensor.
+  Bukti        :Penelitian Putra et al. dan Damayanti & Noer fokus pada monitoring serta notifikasi Telegram, bukan pemilahan otomatis multisensor.
+  Signifikansi : Multisensor dapat meningkatkan akurasi pemilahan dengan biaya lebih murah dibanding sistem berbasis kamera/AI.
 
-Gap 2: [Jenis: ____]
-  Deskripsi    : ____________________
-  Bukti        : ____________________
-  Signifikansi : ____________________
-
+Gap 2: [Jenis:Context + Performance Gap]
+  Deskripsi    : istem AI memiliki akurasi tinggi tetapi membutuhkan perangkat mahal dan konsumsi daya besar.
+  Bukti        : White et al. menggunakan CNN dengan Jetson Nano untuk mencapai akurasi tinggi.
+  Signifikansi :ESP32 lebih murah dan hemat daya sehingga lebih cocok diterapkan di sekolah, rumah tangga, dan lingkungan masyarakat Indonesia.
 Baseline Selection:
-| Baseline | Relevansi | Representatif | Source |
-|----------|-----------|---------------|--------|
-|          |           |               |        |
+| Baseline | Relevansi    | Representatif | Source |
+
+
+
+|ESP32     |Sama" smart -|Dipakai pada banyak penelitian IoT                              |--------|
+|          |waste monitor
+           |               |        |
 ```
 
 ---
@@ -123,21 +126,25 @@ Gunakan topik riset dari WS-02. Cari minimal 5 paper relevan menggunakan databas
 > - Tulis query Boolean yang digunakan: contoh `("object detection" OR "image classification") AND ("edge computing") NOT ("medical")`. Dokumentasikan query secara eksplisit.
 > - Akses gratis: buka Google Scholar → cari judul paper → klik [PDF] jika tersedia, atau akses lewat campus VPN
 
-**Topik riset:** ________________________________________
-**Query pencarian:** ____________________________________
-**Database:** ___________________________________________
+**Topik riset:** Sistem Pemilahan Sampah Anorganik Berbasis ESP32 Menggunakan Sensor Multivariable dengan Notifikasi Real-Time via Telegram
+
+**Query pencarian:** ("smart waste sorting" OR "automatic waste classification") AND ("ESP32" OR "IoT") AND ("sensor" OR "multisensor") AND ("Telegram notification")
+
+**Database:** 
+google Scholar, IEEE Xplore, ResearchGate
 
 | # | Study | Tahun | Method | Dataset | Result | Limitasi |
 |---|-------|-------|--------|---------|--------|----------|
-| 1 | *Contoh: Rahman et al.* | *2023* | *CNN* | *ImageNet subset* | *Acc 91%* | *Hanya 3 kelas* |
-| 2 | | | | | | |
-| 3 | | | | | | |
-| 4 | | | | | | |
-| 5 | | | | | | |
+| 1 | Damayanti & Noer | *2025* | *Smart Dustbin IoT + Telegram* | *Prototype smart bin* | *Notifikasi real-time berhasil* | *Hanya 2 kategori sampah* |
+| 2 |Lianawati et al. |2024 |ESP32 + sensor berat |Sampah organik/plastik |Akurasi 86,67% |Belum multisensor |
+| 3 | Putra et al.|2024 | ESP32 + infrared + Telegram|Monitoring kapasitas tempat sampah |Sistem stabil real-time |Tidak ada klasifikasi sampah |
+| 4 |White et al. | 2020| CNN + Edge AI|Dataset 6 kelas sampah | Akurasi 97%| Hardware mahal|
+| 5 | Lam et al.|2022 |AI + IoT Smart Bin |Dataset visual waste |Akurasi 90% | Konsumsi daya tinggi|
 
-**Pola yang terlihat — Metode dominan:** ___________________
-**Limitasi yang berulang:** ______________________________
-
+**Pola yang terlihat — Metode dominan:** 
+IoT berbasis ESP32 dengan sensor ultrasonik dan notifikasi Telegram.
+**Limitasi yang berulang:** 
+Belum ada integrasi multisensor low-cost untuk klasifikasi sampah anorganik secara real-time.
 ---
 
 ## Latihan 2 — Gap Identification
@@ -146,14 +153,15 @@ Berdasarkan tabel di Latihan 1, identifikasi gap.
 
 | Jenis Gap | Ditemukan? | Gap Statement |
 |-----------|-----------|---------------|
-| Performance Gap | [ ] Ya / [ ] Tidak | *Contoh: Akurasi turun di bawah 80% untuk kelas minoritas* |
-| Method Gap | [ ] Ya / [ ] Tidak | |
-| Data Gap | [ ] Ya / [ ] Tidak | |
-| Context Gap | [ ] Ya / [ ] Tidak | |
+| Performance Gap | [✓ ] Ya / [ ] Tidak | *Contoh: Akurasi turun di bawah 80% untuk kelas minoritas* |
+| Method Gap | [ ✓ ] Ya / [ ] Tidak | |
+| Data Gap | [ ✓ ] Ya / [ ] Tidak | |
+| Context Gap | [ ✓] Ya / [ ] Tidak | |
 
-**Gap utama yang dipilih:** _____________________________
+**Gap utama yang dipilih:** 
+Method Gap + Context Gap
 **Mengapa gap ini penting (bukan sekadar "belum ada yang meneliti")?**
-> ___________________________________________________
+> Karena sistem yang ada masih mahal dan sulit diterapkan secara luas. Penggunaan ESP32 dan multisensor dapat menjadi solusi murah, hemat energi, dan realistis untuk diterapkan pada lingkungan masyarakat Indonesia.
 
 ---
 
@@ -163,11 +171,11 @@ Pilih 2 baseline dari literatur yang sudah dibaca.
 
 | # | Baseline | Mengapa Relevan | Mengapa Representatif | Apakah SOTA? | Sumber |
 |---|----------|----------------|----------------------|-------------|--------|
-| 1 | *Contoh: RF + TF-IDF* | *Task sama: klasifikasi teks* | *Dipakai 6 dari 10 paper* | *Bukan, tapi common practice* | *Lee et al., 2022* |
+| 1 | *ESP32 + Ultrasonic Sensor* | *Sama-sama digunakan untuk monitoring dan pemilahan sampah berbasis IoT* | *Dipakai 6 dari 10 paper* | *Bukan, tapi common practice* | *Lee et al., 2022* |
 | 2 | | | | | |
 
-**Apakah pemilihan baseline ini bisa dianggap straw man?** [ ] Ya / [ ] Tidak
-> Justifikasi: ________________________________________
+**Apakah pemilihan baseline ini bisa dianggap straw man?** [ ✔] Ya / [ ] Tidak
+> Justifikasi: Baseline dipilih dari dua pendekatan utama pada literatur, yaitu sistem IoT low-cost dan sistem AI state-of-the-art sehingga perbandingan tetap adil dan relevan.
 
 ---
 
