@@ -80,26 +80,28 @@ Jika variabel tidak bisa di-map ke komponen apapun → arsitektur perlu didesain
 ```
 SYSTEM-EXPERIMENT MAPPING
 
-Research Question: ____________________
+Research Question:Apakah sistem pemilahan sampah anorganik berbasis ESP32 menggunakan sensor multivariable menghasilkan akurasi klasifikasi dan delay notifikasi yang lebih baik dibanding sistem sensor tunggal?
 
 Variable → Component Mapping:
 | Variabel | Tipe | Komponen Sistem | Cara Manipulasi/Pengukuran |
 |----------|------|-----------------|---------------------------|
-|          | IV   |                 |                           |
-|          | DV   |                 |                           |
-|          | CV   |                 |                           |
+|   Jenis sensor       | IV   |Modul sensor ESP32                 |   Mengganti mode sensor tunggal  multisensor melalui konfigurasi                        |
+|    Delay notifikasi      | DV   |  Modul Telegram Bot               |   Mengukur waktu dari deteksi hingga notifikasi diterima                        |
+|     Jenis sampah     | CV   |  Objek pengujian               |    Menggunakan jenis sampah yang sama pada setiap eksperimen                       |
 
 4 Prinsip Desain:
-  [ ] Traceability — Setiap komponen bisa ditelusuri ke variabel
-  [ ] Variable Isolation — IV bisa diubah tanpa mengubah CV
-  [ ] Measurement Integration — Pengukuran DV built-in
-  [ ] Reproducibility — Setup bisa direkonstruksi
+  [ ☑ ] Traceability — Setiap komponen bisa ditelusuri ke variabel
+  [ ☑ ] Variable Isolation — IV bisa diubah tanpa mengubah CV
+  [ ☑ ] Measurement Integration — Pengukuran DV built-in
+  [ ☑ ] Reproducibility — Setup bisa direkonstruksi
 
 Experimental Setup:
-  Input data     : ____________________
-  Parameter      : ____________________
-  Output format  : ____________________
-```
+  Input data     :Sampah anorganik (plastik, kaleng, kaca)
+  Parameter      :-Mode sensor (single/multisensor)
+                  -Jumlah pengujian
+                  -Koneksi internet tetap
+                  -ESP32 configuration
+  Output format  :Delay notification (detik)
 
 ---
 
@@ -107,17 +109,16 @@ Experimental Setup:
 
 Gunakan RQ dan variabel dari WS-05. Petakan ke komponen sistem.
 
-**RQ:** __________________________________________________
+**RQ:** Apakah sistem multisensor berbasis ESP32 meningkatkan accuracy klasifikasi sampah dan mengurangi delay notifikasi dibanding sensor tunggal
 
 | Variabel | Tipe | Komponen Sistem | Cara Manipulasi / Pengukuran |
 |----------|------|-----------------|---------------------------|
-| *Contoh: Jenis model* | *IV* | *Modul classifier (swap RF ↔ CNN)* | *Ganti config `model_type`* |
-| | DV | | |
-| | CV | | |
+| Jenis sensor| IV | Modul sensor ESP32 (single sensor ↔ multisensor)| Mengubah konfigurasi sensor pada sistem|
+| Akurasi klasifikasi| DV | Modul klasifikasi sampah|Menghitung jumlah klasifikasi benar dari total pengujian |
+|Kondisi jaringan | CV | Modul WiFi ESP32| Menggunakan koneksi internet yang sama selama pengujian|
 
-**Apakah semua variabel bisa di-map?** [ ] Ya / [ ] Tidak
-> Jika tidak, komponen apa yang perlu ditambahkan? _________
-
+**Apakah semua variabel bisa di-map?** [☑ ] Ya / [ ] Tidak
+> Jika tidak, komponen apa yang perlu ditambahkan? Tidak perlu tambahan karena semua variabel sudah memiliki komponen sistem yang sesuai.
 ---
 
 ## Latihan 2 — 4 Prinsip Desain
@@ -126,15 +127,14 @@ Evaluasi desain sistem terhadap 4 prinsip.
 
 | Prinsip | Status | Bukti / Penjelasan |
 |---------|--------|-------------------|
-| Traceability | *Contoh: ✅ — setiap modul punya label variabel* | |
-| Modularity | | |
-| Controllability | | |
-| Measurability | | |
+| Traceability |  ✅ — Setiap modul terhubung langsung dengan variabel penelitian |
+| Modularity |✅ |Sensor dapat diganti tanpa mengubah modul lain |
+| Controllability | ✅|Parameter eksperimen dapat diatur melalui konfigurasi |
+| Measurability |✅ |Sistem otomatis mencatat accuracy dan delay |
 
-**Prinsip mana yang paling sulit dipenuhi?** _______________
+**Prinsip mana yang paling sulit dipenuhi?** Measurability
 **Strategi untuk mengatasinya:**
-> ___________________________________________________
-
+>Menambahkan sistem logging otomatis pada ESP32 dan Telegram untuk mencatat waktu deteksi dan hasil klasifikasi secara real-time.
 ---
 
 ## Latihan 3 — Ablation Study Planning
@@ -146,14 +146,14 @@ Jika sistem memiliki 3 komponen utama, rencanakan ablation study.
 
 | Kondisi | Komponen A | Komponen B | Komponen C | Hasil yang Diharapkan |
 |---------|-----------|-----------|-----------|----------------------|
-| Full | *Contoh: ✅ CNN* | *Contoh: ✅ Temporal features* | *Contoh: ✅ Z-score norm* | *Baseline penuh* |
-| – A | ❌ (ganti RF) | ✅ | ✅ | |
-| – B | ✅ | ❌ (tanpa temporal) | ✅ | |
-| – C | ✅ | ✅ | ❌ (tanpa normalisasi) | |
+| Full | ✅ Multisensor| ✅ Telegram Notification | ✅ Data Logging| Accuracy dan monitoring optimal |
+| – A | ❌ Single sensor | ✅ | ✅ |Accuracy menurun |
+| – B | ✅ | ❌ Tanpa Telegram | ✅ |Tidak ada monitoring real-time |
+| – C | ✅ | ✅ | ❌ Tanpa logging |Data eksperimen tidak lengkap |
 
-**Komponen mana yang diprediksi paling berkontribusi?** _____
+**Komponen mana yang diprediksi paling berkontribusi?** Komponen multisensor
 **Mengapa?**
-> ___________________________________________________
+> Karena multisensor secara langsung memengaruhi kemampuan sistem dalam membedakan jenis sampah sehingga berpengaruh besar terhadap accuracy klasifikasi.
 
 ---
 
@@ -162,5 +162,5 @@ Jika sistem memiliki 3 komponen utama, rencanakan ablation study.
 > Apa risiko jika sistem dibangun seperti produk (monolitik, fitur lengkap) lalu baru dilakukan eksperimen? Mengapa arsitektur modular penting untuk riset?
 
 **Jawaban:**
-> ___________________________________________________
-> ___________________________________________________
+>Jika sistem dibangun seperti produk monolitik dengan banyak fitur tambahan, maka eksperimen menjadi sulit dikontrol karena banyak variabel saling memengaruhi. Hal ini dapat menyebabkan hasil penelitian tidak valid dan sulit direproduksi.
+> Arsitektur modular penting dalam riset karena memungkinkan setiap variabel diuji secara terpisah, mempermudah eksperimen, serta meningkatkan traceability dan reproducibility penelitian.
