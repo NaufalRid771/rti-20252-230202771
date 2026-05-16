@@ -66,19 +66,19 @@ Metrik harus ditentukan **sebelum** eksperimen. Memilih metrik setelah melihat d
 ```
 VARIABLE & METRIC DEFINITION
 
-Research Question: ____________________
+Research Question:Apakah sistem pemilahan sampah anorganik berbasis ESP32 menggunakan sensor multivariable menghasilkan akurasi klasifikasi dan delay notifikasi yang lebih baik dibanding sistem sensor tunggal?
 
 | Variabel | Tipe | Konsep | Metrik | Skala | Satuan | Cara Mengukur | Justifikasi |
 |----------|------|--------|--------|-------|--------|---------------|-------------|
-|          | IV   |        |        |       |        |               |             |
-|          | DV   |        |        |       |        |               |             |
-|          | CV   |        |        |       |        |               |             |
-
+|          | IV  |Pendekatan sistem klasifikasi     | Sensor tunggal vs multisensor       |Nominal       |  —      |Membandingkan konfigurasi sensor pada prototype               |  Variabel utama yang memengaruhi performa sistem           |
+|          | DV   | Ketepatan pemilahan sampah       | Accuracy (%)       | Ratio      | Persen (%)       | Jumlah klasifikasi benar ÷ total pengujian × 100%              |  Accuracy mewakili performa utama sistem           |
+|          | CV   | Karakteristik objek uji       |  Plastik, kaca, kaleng      | Nominal      | —       | 
+|Mengontrol jenis sampah yang diuji|   Agar hasil pengujian konsisten            | 
 Alignment Check:
   RQ → Concept → Variable → Metric → Data → Result
-  [ ] Setiap langkah terdokumentasi
-  [ ] Tidak ada "lompatan logis"
-  [ ] Metrik mengukur apa yang dimaksud (construct validity)
+  [ ☑ ] Setiap langkah terdokumentasi
+  [ ☑ ] Tidak ada "lompatan logis"
+  [ ☑ ] Metrik mengukur apa yang dimaksud (construct validity)
 ```
 
 ---
@@ -87,17 +87,17 @@ Alignment Check:
 
 Gunakan RQ dari WS-04. Definisikan variabel dan metriknya.
 
-**RQ:** __________________________________________________
+**RQ:** 
+Apakah sistem pemilahan sampah anorganik berbasis ESP32 menggunakan sensor multivariable menghasilkan akurasi klasifikasi dan delay notifikasi yang lebih baik dibanding sistem sensor tunggal?
 
 | Variabel | Tipe | Konsep Abstrak | Metrik Konkret | Skala (NOIR) | Satuan |
 |----------|------|---------------|----------------|-------------|--------|
 | *Contoh: Jenis model* | *IV* | *Pendekatan klasifikasi* | *Categorical: CNN vs RF* | *Nominal* | *—* |
-| | DV | | | | |
-| | CV | | | | |
+| Akurasi klasifikasi| DV | Ketepatan pemilahan sampah|Accuracy (%) | Ratio| Persen (%)|
+|Jenis sampah | CV |Karakteristik objek pengujian |Plastik, kaca, kaleng |Nominal |—|
 
-**Apakah ada lompatan logis dalam rantai?** [ ] Ya / [ ] Tidak
-> Jika ya, di mana? ____________________________________
-
+**Apakah ada lompatan logis dalam rantai?** [ ] Ya / [ ☑ ] Tidak
+> Jika ya, di mana? Tidak ada, karena semua konsep abstrak sudah diterjemahkan menjadi variabel dan metrik yang dapat diukur langsung.
 ---
 
 ## Latihan 2 — Evaluasi Metrik
@@ -106,15 +106,15 @@ Evaluasi metrik DV yang dipilih di Latihan 1 menggunakan 3 kriteria.
 
 | Kriteria | Skor (1-5) | Justifikasi |
 |----------|-----------|-------------|
-| Representative | *Contoh: 4 — F1-Score mewakili keseimbangan precision-recall* | |
-| Sensitive | | |
-| Feasible | | |
+| Representative | 5 |Accuracy dan delay langsung mewakili performa sistem smart waste |
+| Sensitive | 4|Perubahan kecil pada performa masih dapat terdeteksi |
+| Feasible | 5| Data dapat dikumpulkan langsung dari prototype dan Telegram|
 
-**Apakah perlu secondary metric?** [ ] Ya / [ ] Tidak
-> Jika ya, apa dan mengapa? _____________________________
+**Apakah perlu secondary metric?** [ ☑] Ya / [ ] Tidak
+> Jika ya, apa dan mengapa? Precision dan recall dapat digunakan sebagai secondary metric untuk melihat performa klasifikasi tiap jenis sampah secara lebih detail.
 
 **Contoh kasus ceiling effect untuk metrik ini:**
-> ___________________________________________________
+>Jika accuracy seluruh sistem sudah mendekati 100%, maka perbedaan performa antar metode menjadi sulit terlihat hanya dari accuracy saja.
 
 ---
 
@@ -124,10 +124,10 @@ Bayangkan data yang akan dikumpulkan dari eksperimen. Evaluasi 4 dimensi kualita
 
 | Dimensi | Pertanyaan | Jawaban | Strategi Mitigasi |
 |---------|-----------|---------|------------------|
-| Completeness | *Apakah semua data point terkumpul?* | | |
-| Consistency | *Apakah ada kontradiksi internal?* | | |
-| Validity | *Apakah benar-benar mengukur yang dimaksud?* | | |
-| Representativeness | *Apakah sampel mewakili populasi target?* | | |
+| Completeness | *Apakah semua data point terkumpul?* |Bisa terjadi data hilang saat koneksi internet putus |Menyimpan log lokal pada ESP32 |
+| Consistency | *Apakah ada kontradiksi internal?* | Kemungkinan delay berbeda pada tiap pengujian|Melakukan pengujian berulang |
+| Validity | *Apakah benar-benar mengukur yang dimaksud?* | Accuracy sudah sesuai tujuan klasifikasi|Menggunakan skenario uji yang sama |
+| Representativeness | *Apakah sampel mewakili populasi target?* | Sampel sampah masih terbatas|Menambah variasi jenis sampah |
 
 ---
 
@@ -136,5 +136,5 @@ Bayangkan data yang akan dikumpulkan dari eksperimen. Evaluasi 4 dimensi kualita
 > Mengapa memilih metrik setelah melihat data dianggap p-hacking? Apa bedanya dengan eksplorasi data yang sah?
 
 **Jawaban:**
-> ___________________________________________________
-> ___________________________________________________
+> Memilih metrik setelah melihat data dianggap p-hacking karena peneliti dapat memilih metrik yang paling menguntungkan hasil penelitian sehingga kesimpulan menjadi bias. 
+> Hal ini berbeda dengan eksplorasi data yang sah, karena eksplorasi dilakukan untuk menemukan pola tambahan dan hasilnya dilaporkan sebagai exploratory, bukan sebagai bukti utama untuk menerima hipotesis.
