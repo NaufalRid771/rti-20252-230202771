@@ -65,40 +65,38 @@ Ancaman validitas harus diidentifikasi **sebelum** eksperimen dan mitigasinya di
 
 ## Template A.7 — Desain Eksperimen Lengkap
 
-```
 EXPERIMENT DESIGN
 
-Research Question : ____________________
-Hypothesis        : ____________________
-Tipe Eksperimen   : [ ] Comparison  [ ] Ablation  [ ] Parameter
+Research Question : Apakah sistem pemilahan sampah anorganik berbasis ESP32 menggunakan sensor multivariable menghasilkan accuracy klasifikasi dan delay notifikasi yang lebih baik dibanding sistem sensor tunggal?  
+Hypothesis        : Sistem multisensor berbasis ESP32 menghasilkan accuracy lebih tinggi dan delay notifikasi lebih rendah dibanding sistem sensor tunggal.  
+Tipe Eksperimen   : [✓] Comparison  [✓] Ablation  [ ] Parameter  
 
 Kondisi Eksperimen:
 | Kondisi | Deskripsi | IV Value | CV Settings |
 |---------|-----------|----------|-------------|
-| Control |           |          |             |
-| Treatment |         |          |             |
+| Control | Sistem smart bin dengan sensor tunggal | Single sensor | Jenis sampah sama, jaringan sama, ESP32 sama |
+| Treatment | Jenis sampah sama, jaringan sama, ESP32 sama | Multisensor | Jenis sampah sama, jaringan sama, ESP32 sama |
 
 Fairness Checklist:
-  [ ] Dataset identik untuk semua kondisi
-  [ ] Preprocessing setara
-  [ ] Tuning effort setara
-  [ ] Environment identik
-  [ ] Metrik evaluasi sama
+  [✓] Dataset identik untuk semua kondisi  
+  [✓] Preprocessing setara  
+  [✓] Tuning effort setara  
+  [✓] Environment identik  
+  [✓] Metrik evaluasi sama  
 
 Threat Analysis:
 | Threat Type | Ancaman Spesifik | Mitigasi |
 |-------------|-----------------|----------|
-| Internal    |                 |          |
-| External    |                 |          |
-| Construct   |                 |          |
-| Conclusion  |                 |          |
+| Internal    | Kondisi jaringan berubah saat eksperimen | Gunakan jaringan WiFi yang sama |
+| External    | Pengujian hanya pada skala laboratorium | Tambahkan pengujian pada lingkungan nyata |
+| Construct   | Accuracy belum sepenuhnya menggambarkan kualitas sistem | Tambahkan precision dan recall |
+| Conclusion  | Jumlah sampel terlalu sedikit | Lakukan pengujian berulang |
 
 Statistical Plan:
-  Uji statistik   : ____________________
-  Justifikasi      : ____________________
-  Alpha            : ____________________
-  Effect size min  : ____________________
-```
+  Uji statistik    : Perbandingan rata-rata accuracy dan delay  
+  Justifikasi      : Untuk melihat apakah multisensor memberikan peningkatan performa dibanding baseline sensor tunggal.  
+  Alpha            : 0.05  
+  Effect size min  : Peningkatan accuracy minimal 10%  
 
 ---
 
@@ -106,13 +104,13 @@ Statistical Plan:
 
 Susun desain eksperimen berdasarkan RQ, variabel, dan sistem dari WS-04 sampai WS-06.
 
-**RQ:** __________________________________________________
-**Tipe eksperimen:** [ ] Comparison / [ ] Ablation / [ ] Parameter
+**RQ:** Apakah sistem multisensor berbasis ESP32 meningkatkan accuracy klasifikasi sampah dan mengurangi delay notifikasi dibanding sensor tunggal?  
+**Tipe eksperimen:** [✓] Comparison / [✓] Ablation / [ ] Parameter  
 
 | Kondisi | Deskripsi | IV Value | CV Settings |
 |---------|-----------|----------|-------------|
-| Control | *Contoh: RF baseline dari literatur* | *RF* | *Dataset X, 80:20 split, seed 42* |
-| Treatment | | | |
+| Control | Sistem smart bin sensor tunggal | Single sensor | Sampah sama, WiFi sama, ESP32 sama |
+| Treatment | Sistem smart bin multisensor | Multisensor | Sampah sama, WiFi sama, ESP32 sama |
 
 ---
 
@@ -122,13 +120,13 @@ Evaluasi apakah desain eksperimen di Latihan 1 sudah fair.
 
 | Kriteria | Status | Detail |
 |----------|--------|--------|
-| Dataset identik | *Contoh: ✅ — sama-sama pakai CIC-MalMem-2022* | |
-| Preprocessing setara | | |
-| Tuning effort setara | | |
-| Environment identik | | |
-| Metrik evaluasi sama | | |
+| Dataset identik | ✓ | Menggunakan jenis sampah yang sama |
+| Preprocessing setara | ✓ | Kondisi pengujian sama |
+| Tuning effort setara | ✓ | Tidak ada optimasi khusus pada salah satu metode |
+| Environment identik | ✓ | Menggunakan perangkat dan jaringan yang sama |
+| Metrik evaluasi sama | ✓ | Sama-sama menggunakan accuracy dan delay |
 
-**Ada yang tidak fair?** [ ] Ya / [ ] Tidak
+**Ada yang tidak fair?** [ ] Ya / [✓] Tidak
 > Jika ya, bagaimana cara memperbaikinya? ________________
 
 ---
@@ -139,14 +137,14 @@ Identifikasi ancaman validitas untuk desain eksperimen ini.
 
 | Threat Type | Ancaman Spesifik | Mitigasi |
 |-------------|-----------------|----------|
-| Internal | *Contoh: Data leakage antara train-test* | *Contoh: Gunakan stratified split, validasi tidak ada overlap* |
-| External | | |
-| Construct | | |
-| Conclusion | | |
+| Internal | Delay dipengaruhi koneksi internet | Gunakan jaringan stabil dan sama |
+| External | Hanya diuji pada sedikit jenis sampah | Tambah variasi sampah |
+| Construct | Accuracy saja belum cukup | Tambahkan precision dan recall |
+| Conclusion | Sampel pengujian terlalu sedikit | Perbanyak jumlah eksperimen |
 
-**Ancaman mana yang paling sulit dimitigasi?** _____________
+**Ancaman mana yang paling sulit dimitigasi?** External validity
 **Mengapa?**
-> ___________________________________________________
+> Karena kondisi dunia nyata sangat beragam sehingga sulit memastikan sistem bekerja sama baiknya di semua lingkungan.
 
 ---
 
@@ -155,6 +153,6 @@ Identifikasi ancaman validitas untuk desain eksperimen ini.
 > Sebuah paper melaporkan "metode kami mengalahkan semua baseline." Apa 3 pertanyaan pertama yang harus diajukan untuk mengevaluasi klaim ini?
 
 **Jawaban:**
-1. ___________________________________________________
-2. ___________________________________________________
-3. ___________________________________________________
+1. Apakah baseline dibandingkan secara fair dengan kondisi yang sama?  
+2. Apakah metrik evaluasi yang digunakan sudah sesuai dan jelas?  
+3. Apakah jumlah data dan eksperimen cukup untuk mendukung kesimpulan?  
