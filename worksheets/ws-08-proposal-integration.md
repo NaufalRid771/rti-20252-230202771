@@ -109,13 +109,13 @@ Kumpulkan hasil dari WS-02 sampai WS-07 menjadi satu ringkasan proposal.
 
 | Komponen | Sumber | Isi (1-2 kalimat) |
 |----------|--------|-------------------|
-| Problem Statement | WS-02 | *Contoh: Sistem rekomendasi memiliki akurasi tinggi (RMSE 0.87) tetapi satisfaction score rendah (45/100). Gap antara metrik teknis dan kepuasan pengguna belum diteliti.* |
-| Gap | WS-03 | *Contoh: Tidak ada studi yang mengintegrasikan collaborative filtering dengan user-context signals untuk meningkatkan satisfaction.* |
-| RQ | WS-04 | *Contoh: Apakah penambahan context-aware signals pada collaborative filtering meningkatkan satisfaction score tanpa menurunkan RMSE?* |
-| Hipotesis | WS-04 | *Contoh: H₁: Sistem CF+context menghasilkan satisfaction ≥ 70/100 dengan RMSE ≤ 0.90 dibanding baseline CF murni.* |
-| Variabel & Metrik | WS-05 | *Contoh: IV = jenis sistem (CF vs CF+context); DV = satisfaction score (skala 0-100) + RMSE (regresi).* |
-| Sistem | WS-06 | |
-| Desain Eksperimen | WS-07 | |
+| Problem Statement | WS-02 | Pengelolaan sampah masih banyak dilakukan secara manual sehingga proses pemilahan sampah anorganik kurang efisien dan sering terjadi kesalahan klasifikasi. Sistem berbasis IoT diperlukan untuk membantu proses pemilahan secara otomatis dan real-time.|
+| Gap | WS-03 | Sebagian besar penelitian hanya menggunakan sensor tunggal dan belum banyak mengintegrasikan multisensor dengan notifikasi Telegram real-time untuk meningkatkan akurasi klasifikasi dan monitoring.|
+| RQ | WS-04 | Apakah sistem pemilahan sampah anorganik berbasis ESP32 menggunakan sensor multivariable menghasilkan akurasi klasifikasi dan delay notifikasi yang lebih baik dibanding sistem sensor tunggal? |
+| Hipotesis | WS-04 | H₁: Sistem multisensor berbasis ESP32 menghasilkan accuracy lebih tinggi dan delay notifikasi lebih rendah dibanding sistem sensor tunggal. |
+| Variabel & Metrik | WS-05 | IV = jenis sensor (single sensor vs multisensor). DV = accuracy klasifikasi (%) dan delay notifikasi (detik). CV = jenis sampah dan kondisi jaringan. |
+| Sistem | WS-06 |Sistem terdiri dari ESP32, sensor multivariable, modul klasifikasi sampah, WiFi, dan Telegram Bot untuk notifikasi real-time. |
+| Desain Eksperimen | WS-07 |Comparison study antara sensor tunggal dan multisensor menggunakan kondisi pengujian yang sama, dengan metrik accuracy dan delay notifikasi. |
 
 ---
 
@@ -125,18 +125,20 @@ Verifikasi 6 koneksi kritis. Isi dengan merujuk tabel di Latihan 1.
 
 | Koneksi | Status | Bukti |
 |---------|--------|-------|
-| Problem → Gap | *Contoh: ✅ — gap muncul dari 15 paper Bab 3 yang tidak ada yang mengkombinasikan CF + context untuk satisfaction* | |
-| Gap → RQ | *Contoh: ✅ — RQ langsung menanyakan apakah CF+context meningkatkan satisfaction* | |
-| RQ → Hypothesis | *Contoh: ✅ — H₁ memprediksi satisfaction ≥ 70 dengan threshold RMSE ≤ 0.90* | |
-| Hypothesis → Metric | | |
-| Metric → System | | |
-| System → Experiment | | |
+| Problem → Gap |✅ Literatur menunjukkan sistem pemilahan otomatis masih memiliki keterbatasan pada penggunaan sensor tunggal dan monitoring real-time. | |
+| Gap → RQ |✅ RQ secara langsung menguji apakah multisensor dapat mengatasi keterbatasan tersebut.| |
+| RQ → Hypothesis |✅ Hipotesis memprediksi peningkatan accuracy dan penurunan delay notifikasi.| |
+| Hypothesis → Metric |✅ | Accuracy (%) dan delay (detik) digunakan untuk menguji hipotesis.|
+| Metric → System |✅ | ESP32 dan Telegram Bot menghasilkan data accuracy dan delay yang dapat diukur.|
+| System → Experiment | ✅|Sistem digunakan sebagai alat eksperimen untuk membandingkan dua kondisi sensor. |
 
-**Koneksi mana yang paling lemah?** _______________________
+**Koneksi mana yang paling lemah?**
+Problem → Gap
+ Menambahkan lebih banyak referensi jurnal terbaru yang menunjukkan keterbatasan sistem pemilahan sampah berbasis sensor tunggal sehingga research gap menjadi lebih valid dan memiliki dasar literatur yang kuat.
 **Bagaimana cara memperkuatnya?**
-> ___________________________________________________
+> Menambahkan lebih banyak referensi penelitian yang menunjukkan keterbatasan sensor tunggal sehingga gap menjadi lebih kuat dan berbasis bukti.
 
-**Konsistensi horizontal — apakah istilah dan scope konsisten?** [ ] Ya / [ ] Tidak
+**Konsistensi horizontal — apakah istilah dan scope konsisten?** [☑ ] Ya / [ ] Tidak
 > Jika tidak, di bagian mana terjadi inkonsistensi? _________
 
 ---
@@ -147,14 +149,14 @@ Evaluasi proposal mini menggunakan rubrik.
 
 | Kriteria | Skor (1-3) | Justifikasi |
 |----------|-----------|-------------|
-| Koherensi | *Contoh: 2 — koneksi gap→RQ masih lemah karena gap belum cukup narrow* | |
-| Specificity | *Contoh: 3 — metrik (satisfaction 0-100, RMSE) sudah terdefinisi numerik* | |
-| Feasibility | | |
-| Rigor | | |
+| Koherensi | 3 Semua koneksi dari problem hingga eksperimen saling terhubung. | |
+| Specificity | 3 Variabel, metrik, dan satuan pengukuran sudah jelas (accuracy %, delay detik). | |
+| Feasibility | 3 | Sistem dapat dibuat menggunakan ESP32 dan sensor yang tersedia dengan waktu pengerjaan skripsi normal.|
+| Rigor | 2 |Baseline sudah ada (sensor tunggal), namun masih perlu dukungan literatur yang lebih kuat. |
 
-**Skor total:** _____ / 12
+**Skor total:** 11 / 12
 
-**Apakah proposal siap untuk fase eksekusi?** [ ] Ya / [ ] Belum
+**Apakah proposal siap untuk fase eksekusi?** [ ☑] Ya / [ ] Belum
 > Jika belum, apa yang perlu diperbaiki? __________________
 
 ---
@@ -163,8 +165,10 @@ Evaluasi proposal mini menggunakan rubrik.
 
 > Dari seluruh proses WS-01 sampai WS-08, bagian mana yang paling mudah dan paling sulit? Mengapa? Apa yang akan dilakukan berbeda jika mengulang dari awal?
 
-**Bagian termudah:** ____________________________________
-**Bagian tersulit:** ____________________________________
+**Bagian termudah:** 
+Menentukan variabel, metrik, dan desain sistem karena langsung berasal dari kebutuhan prototype yang dibuat.
+**Bagian tersulit:** 
+Menentukan research gap dan menyusun research question yang benar-benar didukung oleh literatur.
 **Yang akan dilakukan berbeda:**
-> ___________________________________________________
+> Melakukan pencarian literatur lebih sistematis sejak awal sehingga proses identifikasi gap menjadi lebih mudah. Selain itu, dokumentasi paper akan dibuat lebih rapi agar hubungan antara gap, RQ, hipotesis, dan eksperimen lebih jelas.
 > ___________________________________________________
