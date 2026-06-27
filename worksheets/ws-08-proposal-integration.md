@@ -95,8 +95,8 @@ Cognitive Trap Checklist:
 Rubrik Self-Assessment:
 | Kriteria     | 1 (Lemah)                                        | 2 (Cukup)                                     | 3 (Baik)                                           | Skor |
 |------------- |--------------------------------------------------|-----------------------------------------------|----------------------------------------------------|------|
-| Koherensi    | >2 koneksi vertikal terputus                     | 1-2 koneksi lemah, argumen masih bisa diikuti | Semua 6 koneksi terhubung, red thread jelas        |      |
-| Specificity  | Variabel/metrik masih abstrak, tidak ada angka   | Sebagian metrik terdefinisi numerik           | Semua metrik + threshold + unit pengukuran jelas   |      |
+| Koherensi    | 2 koneksi vertikal terputus                     | 1-2 koneksi lemah, argumen masih bisa diikuti   | Semua 6 koneksi terhubung, red thread jelas        |      |
+| Specificity  | Variabel/metrik masih abstrak, tidak ada angka   | Sebagian metrik terdefinisi numerik        | Semua metrik + threshold + unit pengukuran jelas   |      |
 | Feasibility  | Timeline >6 bulan tanpa memperhitungkan sumber   | Timeline 3-6 bulan dengan asumsi tertentu     | Timeline 1-3 bulan realistis dengan rencana detail |      |
 | Rigor        | Baseline tidak jelas atau straw man              | 1-2 baseline dengan justifikasi partial       | 2+ baseline SOTA + justifikasi pemilihan lengkap   |      |
 ```
@@ -149,8 +149,8 @@ Evaluasi proposal mini menggunakan rubrik.
 
 | Kriteria | Skor (1-3) | Justifikasi |
 |----------|-----------|-------------|
-| Koherensi | 3 Semua koneksi dari problem hingga eksperimen saling terhubung. | |
-| Specificity | 3 Variabel, metrik, dan satuan pengukuran sudah jelas (accuracy %, delay detik). | |
+| Koherensi   | 3 |Semua koneksi dari problem hingga eksperimen saling terhubung. | |
+| Specificity | 3 | Variabel, metrik, dan satuan pengukuran sudah jelas (accuracy %, delay detik). | |
 | Feasibility | 3 | Sistem dapat dibuat menggunakan ESP32 dan sensor yang tersedia dengan waktu pengerjaan skripsi normal.|
 | Rigor | 2 |Baseline sudah ada (sensor tunggal), namun masih perlu dukungan literatur yang lebih kuat. |
 
@@ -171,4 +171,4 @@ Menentukan variabel, metrik, dan desain sistem karena langsung berasal dari kebu
 Menentukan research gap dan menyusun research question yang benar-benar didukung oleh literatur.
 **Yang akan dilakukan berbeda:**
 > Melakukan pencarian literatur lebih sistematis sejak awal sehingga proses identifikasi gap menjadi lebih mudah. Selain itu, dokumentasi paper akan dibuat lebih rapi agar hubungan antara gap, RQ, hipotesis, dan eksperimen lebih jelas.
-> ___________________________________________________
+> _
