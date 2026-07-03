@@ -129,11 +129,12 @@ Desain format data log untuk eksperimen Anda. Tentukan field apa saja yang akan 
 **Hasil:**
 | Metrik | Tipe Data | Range Valid |
 |--------|----------|-------------|
-| *Contoh: Accuracy* | *float* | *0.0 – 1.0* |
-| | | |
-| | | |
+|Status Sensor |Boolean | 0–1 |
+|Sudut Servo| | |
+|Status Telegram | | |
+|Status ThingSpeak
 
-**Format output:** [ ] CSV / [ ] JSON / [ ] Database / [ ] Lainnya: ____
+**Format output:** [✔] CSV / [ ] JSON / [ ] Database / [ ] Lainnya: ____
 
 ---
 
