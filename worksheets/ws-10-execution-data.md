@@ -68,20 +68,19 @@ Run gagal/anomali tidak boleh dihapus tanpa dokumentasi. Bisa jadi:
 ```
 EXECUTION PLAN
 
-| Run # | Skenario | Seed | Parameter | Status | Waktu | Output File |
+| Run # |      Skenario               | Seed |         | Parameter |         |Status | Waktu | Output File |
 |-------|----------|------|-----------|--------|-------|-------------|
-| 1     |          |      |           |        |       |             |
-| 2     |          |      |           |        |       |             |
-| 3     |          |      |           |        |       |             |
+| 1     |Tempat sampah kosong|        |Tidak digunakan |Switch = OFF, WiFi aktif|Planned|             |
+| 2     |Tempat sampah penuh |        |Tidak digunakan |           |        |       |             |
+| 3     |Tempat sampah kosong|        | Tidak digunakan        |           |        |       |             |
 | ...   |          |      |           |        |       |             |
 
-Jumlah runs per skenario : ____
-Total runs               : ____
-
+Jumlah runs per skenario : 3 kali
+Total runs               : 6 kali (atau dapat disesuaikan menjadi 10 kali untuk hasil yang lebih konsisten).
 DATA LOG (per run):
-  Run ID    : ____________________
-  Timestamp : ____________________
-  Skenario  : ____________________
+  Run ID    : run-001
+  Timestamp : 2025-06-20 14:30:00
+  Skenario  : Tempat Sampah Penuh
   Input     : ____________________
   Output    : ____________________
   Anomali   : ____________________
@@ -94,17 +93,18 @@ DATA LOG (per run):
 
 Susun execution plan untuk eksperimen Anda. Tentukan skenario, jumlah run, dan seed sebelum eksekusi.
 
-| Run # | Skenario | Seed | Parameter Kunci | Status |
-|-------|----------|------|----------------|--------|
-| *1* | *Contoh: BERT-base, DS-1* | *42* | *lr=2e-5, epoch=10* | *Planned* |
-| *2* | *BERT-base, DS-1* | *123* | *lr=2e-5, epoch=10* | *Planned* |
-| 3 | | | | |
-| 4 | | | | |
+| Run # | Skenario                               | Seed | Parameter Kunci                      | Status  |
+|-------|----------------------------------------|------|--------------------------------------|---------|
+| 1 | Pengujian sistem normal                  | 42   | Sensor aktif, WiFi ON, Telegram ON   | Planned |
+| 2 | Pengujian sistem normal (pengulangan)    | 123  | Sensor aktif, WiFi ON, Telegram ON   | Planned |
+| 3 | Pengujian perubahan kondisi sampah       | 456  | Servo 0°–90°, ThingSpeak ON          | Planned |
+| 4 | Pengujian notifikasi Telegram            | 789  | Bot aktif, API ThingSpeak valid      | Planned |
+| 5 | Pengujian sistem terintegrasi            | 999  | Semua modul aktif                    | Planned |
 | 5 | | | | |
 
-**Total skenario:** ____
-**Run per skenario:** ____
-**Total run keseluruhan:** ____
+**Total skenario:**4
+**Run per skenario:** 5 kali (direncanakan untuk memperoleh hasil yang konsisten)
+**Total run keseluruhan:**20 run
 
 ---
 
@@ -117,14 +117,14 @@ Desain format data log untuk eksperimen Anda. Tentukan field apa saja yang akan 
 |-------|--------|
 | Run ID | *run-001* |
 | Timestamp | *2025-03-15T10:30:00* |
-| | |
+| Skenario| |
 
 **Konfigurasi:**
 | Field | Contoh |
 |-------|--------|
-| Seed | *42* |
-| Code version | *commit abc1234* |
-| | |
+| Seed | 42 |
+| Code version | v1.0 (main.cpp) |
+| WiFi Status|Connected |
 
 **Hasil:**
 | Metrik | Tipe Data | Range Valid |
@@ -143,13 +143,16 @@ Rencanakan bagaimana menangani anomali. Untuk setiap jenis, tentukan langkah yan
 
 | Jenis Anomali | Contoh | Tindakan |
 |---------------|--------|----------|
-| Run gagal (crash) | *Contoh: OOM pada batch_size=64* | *Contoh: Dokumentasi, re-run batch_size=32, catat perubahan* |
-| Hasil ekstrem | | |
-| Waktu eksekusi anomali | | |
-| Inkonsistensi dengan run lain | | |
+| Run gagal(crash) | ESP32 restart karena listrik terputus| Catat penyebab, nyalakan kembali sistem, ulangi pengujian|
+| Hasil ekstrem |Servo tidak bergerak saat sensor aktif | Periksa koneksi kabel dan program, kemudian ulangi pengujian|
+| Waktu eksekusi anomali |Notifikasi Telegram terlambat (>10 detik) |Periksa kualitas koneksi WiFi dan lakukan pengujian ulang |
+| Inkonsistensi dengan run lain | Sensor membaca penuh padahal tempat sampah kosong|Kalibrasi sensor, dokumentasikan hasil, lalu lakukan run ulang |
 
 **Prinsip:** Detect → Investigate → Document → Decide
-
+Detect : Mengidentifikasi adanya anomali selama eksperimen.
+Investigate : Menelusuri penyebab anomali (hardware, software, atau jaringan).
+Document : Mencatat seluruh informasi mengenai anomali pada data log.
+Decide : Menentukan apakah hasil tetap digunakan atau dilakukan pengujian ulang.
 ---
 
 ## Refleksi
@@ -157,6 +160,6 @@ Rencanakan bagaimana menangani anomali. Untuk setiap jenis, tentukan langkah yan
 > Pernahkah Anda melaporkan hasil riset/tugas dari single run? Apa risikonya? Bagaimana multiple run mengubah kepercayaan terhadap hasil?
 
 **Pengalaman sebelumnya:**
-> ___________________________________________________
+> Pada tugas atau proyek sebelumnya saya sering hanya melakukan satu kali pengujian (single run) untuk memastikan sistem berjalan. Cara tersebut memiliki risiko karena hasil yang diperoleh belum tentu konsisten dan dapat dipengaruhi oleh kondisi tertentu, seperti gangguan jaringan, kesalahan pembacaan sensor, atau faktor lingkungan lainnya.
 **Yang akan dilakukan berbeda:**
-> ___________________________________________________
+> Pada penelitian ini saya akan melakukan beberapa kali pengujian (multiple run) pada setiap skenario dengan konfigurasi yang sama. Setiap hasil akan didokumentasikan dalam data log sehingga dapat dibandingkan untuk mengetahui konsistensi sistem. Dengan demikian, hasil penelitian menjadi lebih valid, dapat dipercaya, dan lebih mudah direproduksi oleh peneliti lain.
