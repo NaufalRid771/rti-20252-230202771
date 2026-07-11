@@ -95,9 +95,10 @@ Buat tabel hasil eksperimen Anda (boleh dengan data simulasi jika belum punya da
 
 | Skenario | Metrik 1 (mean ± std) | Metrik 2 (mean ± std) | n |
 |----------|----------------------|----------------------|---|
-| *Contoh: BERT-base* | *88.4 ± 1.2%* | *45.2 ± 3.1 min* | *10* |
-| | | | |
-| | | | |
+| Sistem Terintegrasi|98.7 ± 0.5 % |1.30 ± 0.17 detik | 10|
+| Sistem Normal      |98.4 ± 0.6 % |1.21 ± 0.15 detik | 5 |
+| Kondisi Penuh      |97.8 ± 0.8 % |1.34 ± 0.18 detik | 5 |
+| Notifikasi Telegram|100 ± 0.0 %  |1.42 ± 0.22 detik | 5 |
 
 **Checklist tabel:**
 - [✔️] Self-contained (judul jelas, satuan ada, N tercantum)
