@@ -65,25 +65,26 @@ Keduanya **saling melengkapi**:
 ```
 RESULT PRESENTATION PLAN
 
-Research Question : ____________________
-Metrik Utama      : ____________________
+Research Question : Apakah sistem pemilahan sampah anorganik berbasis ESP32 menggunakan sensor multivariable mampu mendeteksi kondisi tempat sampah secara akurat serta mengirimkan notifikasi Telegram secara real-time?  
+Metrik Utama: 
+1. Akurasi deteksi sensor (%)
+2. Waktu respon notifikasi Telegram (detik)
 
 Tabel Hasil:
 | Skenario | Metrik 1 (mean ± std) | Metrik 2 (mean ± std) | n |
 |----------|----------------------|----------------------|---|
-|          |                      |                      |   |
+|Sistem Normal|    98.4 ± 0.6 %   | 1.21 ± 0.15 detik    | 5 |
+|Kondisi Penuh|    97.8 ± 0.8 %   | 1.34 ± 0.18 detik    | 5 | 
+|Notifikasi Telegram| 100 ± 0.0 % | 1.42 ± 0.22 detik    | 5 |
+|Sistem Terintegrasi|98.7 ± 0.5 % | 1.30 ± 0.17 detik    |10 |
 
 Visualisasi yang Direncanakan:
 | # | Jenis Grafik | Pesan Utama | Metrik |
 |---|-------------|-------------|--------|
-| 1 |             |             |        |
-| 2 |             |             |        |
+| 1 | Bar Chart + Error Bar | Akurasi tiap skenario | Akurasi (%)|
+| 2 | Line Chart            | Waktu respon tiap skenario         |  Waktu (detik) |
 
-Bias Check:
-  [ ] Y-axis mulai dari 0 (atau dijustifikasi)
-  [ ] Error bar/CI ditampilkan
-  [ ] Semua data disertakan (tidak cherry-picked)
-  [ ] Tidak menggunakan 3D tanpa alasan
+Waktu respon tiap skenario 
 ```
 
 ---
@@ -99,10 +100,10 @@ Buat tabel hasil eksperimen Anda (boleh dengan data simulasi jika belum punya da
 | | | | |
 
 **Checklist tabel:**
-- [ ] Self-contained (judul jelas, satuan ada, N tercantum)
-- [ ] Mean ± std (bukan single number)
-- [ ] Diurutkan berdasarkan metrik utama
-- [ ] Format konsisten di semua baris
+- [✔️] Self-contained (judul jelas, satuan ada, N tercantum)
+- [✔️] Mean ± std (bukan single number)
+- [✔️] Diurutkan berdasarkan metrik utama
+- [✔️] Format konsisten di semua baris
 
 ---
 
@@ -112,9 +113,9 @@ Rencanakan 2-3 grafik untuk menyajikan data dari Latihan 1. Setiap grafik = satu
 
 | # | Jenis Grafik | Pesan | Data yang Digunakan |
 |---|-------------|-------|---------------------|
-| 1 | *Contoh: Bar chart + error bar* | *Perbandingan accuracy antar 3 model* | *Mean accuracy ± std* |
-| 2 | *Box plot* | *Distribusi F1 per model* | *Semua run F1* |
-| 3 | *Scatter plot* | *Trade-off accuracy vs training time* | *Mean accuracy vs mean time* |
+| 1 | Bar Chart + Error Bar | Membandingkan akurasi deteksi pada setiap skenario pengujian | Mean akurasi ± standar deviasi |
+| 2 | Line Chart | Menunjukkan perubahan waktu respon notifikasi Telegram pada setiap skenario | Mean waktu respon |
+| 3 | Pie Chart | Menampilkan persentase keberhasilan dan kegagalan pengiriman notifikasi Telegram |Jumlah notifikasi berhasil dan gagal |
 
 ---
 
@@ -126,20 +127,19 @@ Evaluasi visualisasi berikut untuk bias (skenario dari contoh):
 
 | Pertanyaan | Jawaban |
 |-----------|---------|
-| Apakah Y-axis menyesatkan? | *Contoh: Ya — A terlihat 2× B padahal beda 0.4%* |
-| Apakah error bar ditampilkan? | |
-| Apakah semua kondisi ditampilkan? | |
-| Apa solusinya? | |
+| Apakah Y-axis menyesatkan? | Ya. Perbedaan terlihat jauh lebih besar daripada kondisi sebenarnya karena sumbu Y tidak dimulai|
+| Apakah error bar ditampilkan? | Ya, error bar harus ditampilkan agar variasi hasil setiap pengujian terlihat.|
+| Apakah semua kondisi ditampilkan? |Ya, seluruh skenario pengujian harus ditampilkan agar tidak terjadi cherry-picking data. |
+| Apa solusinya? |Gunakan sumbu Y yang dimulai dari nol atau berikan alasan yang jelas jika menggunakan skala lain, serta tampilkan error bar pada setiap grafik. |
 
 **Evaluasi grafik Anda sendiri dari Latihan 2:**
-- [ ] Semua bias check lulus
-- [ ] Ada yang perlu diperbaiki: ____
-
+- [v] Semua bias check lulus
+- [ ] Ada yang perlu diperbaiki: -
 ---
 
 ## Refleksi
 
 > Mengapa tabel dan grafik keduanya diperlukan — tidak cukup salah satu saja? Pernahkah Anda membuat grafik yang (tanpa sengaja) menyesatkan?
 
-> ___________________________________________________
-> ___________________________________________________
+> Tabel diperlukan untuk menyajikan nilai hasil eksperimen secara rinci dan presisi, sedangkan grafik membantu memperlihatkan pola, tren, dan perbandingan antar skenario dengan lebih cepat.
+> Keduanya saling melengkapi sehingga pembaca dapat memahami hasil penelitian secara menyeluruh. Saya pernah membuat grafik batang dengan skala sumbu Y yang terlalu sempit sehingga perbedaan nilai terlihat lebih besar dari kondisi sebenarnya. Setelah mempelajari materi ini, saya memahami pentingnya menggunakan skala yang tepat, menampilkan seluruh data, serta menambahkan error bar agar visualisasi tidak menyesatkan.
