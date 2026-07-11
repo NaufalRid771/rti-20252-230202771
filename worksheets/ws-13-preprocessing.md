@@ -66,15 +66,15 @@ Data leakage terjadi ketika informasi dari test set "bocor" ke preprocessing:
 ```
 PREPROCESSING LOG
 
-Dataset           : ____________________
-Jumlah data awal  : ____________________
+Dataset           : Log pengujian Smart Trash Bin (ESP32)
+Jumlah data awal  : 25 data hasil pengujian
 
 Cleaning:
 | Masalah | Jumlah Kasus | Penanganan | Justifikasi |
 |---------|-------------|------------|-------------|
-| Missing |             |            |             |
-| Duplikat|             |            |             |
-| Error   |             |            |             |
+| Missing | 0             |  Tidak ada tindakan          |   Semua data berhasil direkam           |
+| Duplikat|  1            |  Menghapus data duplikat     |   Terjadi akibat pembacaan sensor berulang tanpa perubahan kondisi          |
+| Error   |  0            |   Tidak ada tindakan                   |    Format data konsisten         |
 
 Transformation:
 | Transformasi | Variabel | Detail | Alasan |
@@ -82,17 +82,17 @@ Transformation:
 |             |          |        |        |
 
 Normalization:
-  Metode    : ____________________
-  Alasan    : ____________________
-  Parameter : (dihitung dari: training set / seluruh data)
+  Metode    : Tidak dilakukan
+  Alasan    : Data berupa status biner (0 dan 1), sehingga tidak memerlukan normalisasi.
+  Parameter : Tidak berlaku
 
 Leakage Check:
   [ ] Parameter normalisasi dari training set saja
   [ ] Tidak ada informasi test set dalam preprocessing
   [ ] Cross-validation dilakukan setelah split
 
-Jumlah data akhir : ____________________
-Script tersedia   : [ ] Ya → path: ____ | [ ] Belum
+Jumlah data akhir : 24 data
+Script tersedia   : [x] Ya → path:src/main.cpp | [ ] Belum
 ```
 
 ---
@@ -104,13 +104,13 @@ Periksa dataset Anda (atau dataset contoh) dan dokumentasikan masalah yang ditem
 | Masalah | Jumlah Kasus | Penanganan | Justifikasi |
 |---------|-------------|------------|-------------|
 | *Contoh: Missing di kolom "label"* | *12 dari 500 (2.4%)* | *Listwise deletion* | *< 5%, distribusi random (MCAR)* |
-| | | | |
-| | | | |
-| | | | |
+|Data duplikat status sensor | 1 |Menghapus data duplikat |Disebabkan sensor membaca kondisi yang sama secara berulang |
+|Missing data|0|Tidak ada tindakan | Seluruh data berhasil diterima|
+|Error format|0|Tidak ada tindakan | Format data konsisten         |
 
-**Jumlah data sebelum cleaning:** ____
-**Jumlah data setelah cleaning:** ____
-**Persentase data yang hilang/berubah:** ____%
+**Jumlah data sebelum cleaning:** 25
+**Jumlah data setelah cleaning:** 24
+**Persentase data yang hilang/berubah:** 4%
 
 ---
 
@@ -119,17 +119,19 @@ Periksa dataset Anda (atau dataset contoh) dan dokumentasikan masalah yang ditem
 Tentukan apakah data Anda perlu normalisasi, dan jika ya, metode apa yang tepat.
 
 | Variabel | Range Asli | Distribusi | Outlier? | Metode Normalisasi | Alasan |
-|----------|-----------|-----------|----------|-------------------|--------|
-| *Contoh: response_time* | *0.1 – 45.2s* | *Right-skewed* | *Ya (45.2s)* | *Robust scaling* | *Ada outlier, perlu robust* || *Contoh: accuracy_score* | *0.72 – 0.95* | *Normal, narrow* | *Tidak* | *Tidak perlu* | *Sudah dalam [0,1], metode berbasis distance tidak digunakan* || | | | | | |
-| | | | | | |
+|---------- |-----------|-----------|----------|-------------------|--------|
+| Status Sensor |0–1    | Biner   | Tidak | Tidak perlu | Data sudah berupa nilai logika |
+| Sudut Servo   |0°–90° | Diskrit | Tidak | Tidak perlu | Nilai tetap sesuai desain sisteme berbasis distance tidak digunakan |
+| Status ThingSpeak|0–1|Biner      |Tidak |Tidak perlu |Sudah dalam bentuk numerik sederhana |
+| Status Telegram  | Berhasil/Gagal|Kategori| Tidak|Tidak perlu |Data bersifat kategorikal |
 
-**Apakah normalisasi diperlukan?** [ ] Ya / [ ] Tidak
+**Apakah normalisasi diperlukan?** [ ] Ya / [x] Tidak
 **Justifikasi:**
-> ___________________________________________________
+> Data yang digunakan berupa status biner dan kategori sehingga tidak memerlukan normalisasi. Seluruh data sudah berada pada rentang yang sesuai dengan kebutuhan analisis sistem IoT.
 
 **Leakage check:**
-- [ ] Parameter dihitung dari training set saja
-- [ ] Normalisasi diterapkan setelah train-test split
+- [ ✔️] Parameter dihitung dari training set saja
+- [ ✔️] Normalisasi diterapkan setelah train-test split
 
 ---
 
@@ -140,16 +142,21 @@ Buat ringkasan preprocessing lengkap — dokumentasi yang cukup bagi orang lain 
 ```
 PREPROCESSING SUMMARY
 
-1. Dataset: ____________________
-2. Data awal: ____ records, ____ features
+1. Dataset:log hasil pengujian Smart Trash Bin berbasis ESP32.
+
+2. Data awal: 25 records, 4 features
 3. Cleaning:
-   - Missing values: ____ kasus, metode: ____
-   - Duplikat: ____ kasus, tindakan: ____
-   - Error: ____ kasus, tindakan: ____
-4. Transformation: ____________________
-5. Normalisasi: ____ (metode), parameter dari ____
-6. Data akhir: ____ records, ____ features
-7. Leakage check: [ ] Lulus / [ ] Ada masalah
+   - Missing values: 0 kasus, metode:tidak ada tindakan.
+   - Duplikat:1 kasus,  tindakan:data duplikat dihapus.
+   - Error:  0 kasus, tindakan: format data valid
+4. Transformation: 
+- Status sensor dikonversi menjadi:
+     LOW = Penuh
+     HIGH = Kosong
+- Timestamp diseragamkan ke format YYYY-MM-DD HH:MM:SS.
+5. Normalisasi:  Tidak dilakukan karena seluruh variabel berupa status biner atau kategorikal.(metode: Tidak ada), parameter dari:Tidak berlaku
+6. Data akhir: 24 records,4 features
+7. Leakage check: [x] Lulus / [ ] Ada masalah
 ```
 
 ---
@@ -158,5 +165,5 @@ PREPROCESSING SUMMARY
 
 > Apakah Anda pernah melakukan normalisasi "karena biasa dilakukan" tanpa mempertimbangkan apakah benar-benar diperlukan? Apa risiko over-preprocessing?
 
-> ___________________________________________________
-> ___________________________________________________
+>Pada proyek ini normalisasi tidak dilakukan karena data yang digunakan berupa status biner dan kategorikal. Melakukan normalisasi tanpa kebutuhan dapat mengubah representasi data yang sebenarnya dan menambah kompleksitas proses analisis tanpa memberikan manfaat. Oleh karena itu, preprocessing hanya dilakukan pada tahap yang memang diperlukan, seperti menghapus data duplikat dan menyeragamkan format data agar hasil analisis tetap akurat dan mudah direproduksi.
+
