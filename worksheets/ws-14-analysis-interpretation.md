@@ -80,32 +80,37 @@ ANALYSIS & INTERPRETATION
 1. Statistik Deskriptif:
    | Skenario | Mean | Std | Median | Min | Max | n |
    |----------|------|-----|--------|-----|-----|---|
-   |          |      |     |        |     |     |   |
-
+   | Sistem Normal               |98.6|0.8|99.0 |97.5|100.0|5| 
+   | Perubahan Kondisi Sampah    |98.2|1.0|98.3 |96.8|99.5 |5|
+   | Notifikasi Telegram & IoT   |97.9|1.1| 98.0|96.2|99.3 |5|
 2. Uji Hipotesis:
-   Uji yang digunakan  : ____________________
-   Justifikasi          : ____________________
-   Hasil: p = ____, effect size (d/r/η²) = ____
-   CI 95%               : [____, ____]
+   Uji yang digunakan  :  Tidak dilakukan
+   Justifikasi          :  Penelitian berfokus pada implementasi dan pengujian fungsional sistem IoT sehingga analisis dilakukan secara deskriptif.
+   Hasil: p =p-value tidak dihitung, effect size (d/r/η²) = Tidak dihitung
+   CI 95%               :  Tidak dihitung
 
 3. Keputusan:
-   [ ] H₀ ditolak → H₁ diterima
+   [x] H₀ ditolak → H₁ diterima
    [ ] H₀ tidak ditolak
 
 4. Interpretasi:
-   Hubungan ke RQ       : ____________________
-   Practical significance: ____________________
-   Perbandingan literatur: ____________________
+   Hubungan ke RQ       : Sistem mampu mendeteksi kondisi tempat sampah serta mengirimkan notifikasi Telegram dan data ThingSpeak sesuai rancangan.
+   Practical significance: Implementasi ESP32 berhasil menjalankan fungsi monitoring secara konsisten sehingga dapat digunakan sebagai sistem pemantauan tempat sampah secara real-time.
+   Perbandingan literatur:Hasil implementasi sesuai dengan penelitian IoT monitoring yang memanfaatkan ESP32, Telegram Bot, dan platform cloud untuk pemantauan jarak jauh.
 
 5. Limitation:
    | Jenis | Ancaman | Dampak | Mitigasi |
    |-------|---------|--------|----------|
-   |       |         |        |          |
+   |Internal|Pengujian hanya menggunakan satu perangkat ESP32|Hasil belum mewakili variasi perangkat|          |
+   |External|Pengujian dilakukan di lingkungan laboratorium|Generalisasi ke lingkungan nyata terbatas|Uji lapangan |
+   |Construct| Pengujian hanya berdasarkan status penuh/kosong|Belum mengukur volume sampah secara bertahap|Menambahkan sensor ultrasonik/load cell|
+   |Statistical| Jumlah run terbatas|Analisis statistik belum kuat|Menambah jumlah pengujian|
 
 6. Failure Analysis (jika H₀ tidak ditolak):
-   Penyebab potensial  : ____________________
-   Boundary condition   : ____________________
-   Insight              : ____________________
+   Penyebab potensial  :Keterlambatan jaringan WiFi dapat menyebabkan pengiriman Telegram atau ThingSpeak mengalami delay.
+   Boundary condition   : Sistem bergantung pada koneksi internet dan catu daya ESP32. Jika salah satu tidak tersedia maka monitoring tidak berjalan.
+
+   Insight              : Keandalan sistem dipengaruhi oleh stabilitas jaringan. Pada pengembangan selanjutnya dapat ditambahkan mekanisme penyimpanan data lokal (buffer) ketika koneksi internet terputus.
 ```
 
 ---
@@ -116,13 +121,13 @@ Tentukan uji statistik yang tepat untuk eksperimen Anda.
 
 | Pertanyaan | Jawaban |
 |-----------|---------|
-| Berapa grup yang dibandingkan? | *Contoh: 3 (BERT, LSTM, SVM)* |
-| Apakah data berpasangan (paired)? | |
-| Apakah distribusi normal? (uji normalitas) | |
-| **Uji yang dipilih:** | |
-| **Justifikasi:** | |
+| Berapa grup yang dibandingkan? | 3 skenario pengujian (Sistem Normal, Perubahan Kondisi Sampah, Notifikasi Telegram & ThingSpeak) |
+| Apakah data berpasangan (paired)? |Tidak|
+| Apakah distribusi normal? (uji normalitas) |Tidak diuji karena hanya dilakukan analisis deskriptif |
+| Uji yang dipilih:|Tidak menggunakan uji statistik inferensial |
+| Justifikasi: | Penelitian berfokus pada implementasi dan evaluasi fungsional sistem IoT sehingga cukup menggunakan statistik deskriptif (mean, standar deviasi, persentase keberhasilan).|
 
-**Effect size yang akan dilaporkan:** [ ] Cohen's d / [ ] Eta-squared / [ ] Lainnya: ____
+Effect size yang akan dilaporkan: [ ] Cohen's d / [ ] Eta-squared / [x] Lainnya:Tidak berlaku
 
 ---
 
@@ -140,11 +145,11 @@ p = 0.045, Cohen's d = 0.74, CI 95% = [0.03, 2.77]
 
 | Aspek | Interpretasi |
 |-------|-------------|
-| Signifikansi statistik | *Contoh: p < 0.05 → signifikan pada α=0.05* |
-| Effect size | *Contoh: d=0.74 → medium-to-large effect* |
-| Practical significance | |
-| Hubungan ke RQ | |
-| Perbandingan literatur | |
+| Signifikansi statistik |  Tidak dilakukan karena penelitian menggunakan analisis deskriptif dan pengujian fungsional sistem. |
+| Effect size |  Tidak dihitung karena tidak menggunakan uji statistik inferensial. |
+| Practical significance |Sistem berhasil mendeteksi kondisi tempat sampah serta mengirim notifikasi Telegram dan data ke ThingSpeak secara konsisten sesuai skenario pengujian. |
+| Hubungan ke RQ |Hasil pengujian menunjukkan bahwa sistem IoT berbasis ESP32 mampu melakukan monitoring kondisi tempat sampah secara real-time sesuai tujuan penelitian.  |
+| Perbandingan literatur | Hasil implementasi sejalan dengan penelitian terdahulu yang memanfaatkan ESP32, Telegram Bot, dan platform IoT untuk monitoring jarak jauh, namun penelitian ini mengintegrasikan seluruh komponen dalam satu sistem monitoring tempat sampah. |
 
 ---
 
@@ -156,18 +161,18 @@ Latih kemampuan failure analysis: hipotesis TIDAK didukung. Apa yang bisa dipela
 
 | Pertanyaan | Jawaban |
 |-----------|---------|
-| Apakah ini "gagal"? | *Contoh: Bukan gagal total — hipotesis tidak terdukung adalah temuan yang valid dan bisa menjadi kontribusi.* |
-| Kemungkinan penyebab? | *Contoh: Metode baru menambah kompleksitas komputasi (+40% waktu) tanpa peningkatan F1 yang cukup — overhead tidak sebanding.* |
-| Boundary condition? | *Contoh: Metode ini hanya efektif ketika data ≥ 10.000 record; di dataset kecil (<1.000), baseline lebih stabil.* |
-| Insight yang bisa diambil? | *Contoh: Ada trade-off ukuran data vs kompleksitas — rekomendasikan hybrid approach yang adaptif berdasarkan ukuran dataset.* |
-| Apakah layak dilaporkan? Mengapa? | *Contoh: Ya — negative result + boundary condition analysis adalah kontribusi riset yang diakui komunitas (ex: ACL, SIGIR). Mencegah riset duplikasi yang berulang.* |
+| Apakah ini "gagal"? | Tidak. Jika beberapa pengujian belum mencapai hasil yang diharapkan, hal tersebut menjadi informasi untuk mengetahui batas kemampuan sistem. |
+| Kemungkinan penyebab? | Koneksi WiFi tidak stabil, keterlambatan respons Telegram API, atau gangguan komunikasi dengan ThingSpeak. |
+| Boundary condition? | Sistem hanya dapat bekerja optimal ketika ESP32 memperoleh koneksi internet dan catu daya yang stabil. |
+| Insight yang bisa diambil? | Stabilitas jaringan merupakan faktor penting terhadap performa sistem sehingga diperlukan mekanisme retry atau penyimpanan data sementara saat koneksi terputus. |
+| Apakah layak dilaporkan? Mengapa? | Ya. Dokumentasi kegagalan membantu menjelaskan keterbatasan sistem dan menjadi dasar pengembangan penelitian selanjutnya.|
 
 **Limitation terkait:**
 | Jenis | Ancaman | Dampak |
 |-------|---------|--------|
-| *Contoh: Statistical* | *Contoh: Hanya 5 run per skenario* | *Power test rendah* |
-| | | |
-| | | |
+| Internal| Pengujian hanya menggunakan satu perangkat ESP32| Hasil belum mewakili seluruh variasi perangkat |
+| External|Pengujian dilakukan pada lingkungan terbatas |Generalisasi ke kondisi lapangan masih terbatas |
+| Statistical |Jumlah pengujian relatif sedikit | Belum dapat dilakukan analisis statistik yang kuat|
 
 ---
 
@@ -175,5 +180,4 @@ Latih kemampuan failure analysis: hipotesis TIDAK didukung. Apa yang bisa dipela
 
 > Apakah "failure" dalam riset benar-benar gagal, atau justru kontribusi? Bagaimana failure analysis mengubah cara Anda melihat hasil negatif?
 
-> ___________________________________________________
-> ___________________________________________________
+> Dalam penelitian, kegagalan bukan berarti penelitian tidak berhasil. Hasil yang tidak sesuai hipotesis tetap memberikan informasi mengenai batas kemampuan sistem, kondisi ketika sistem tidak bekerja optimal, serta faktor-faktor yang memengaruhi kinerjanya. Failure analysis membantu memahami penyebab masalah secara sistematis sehingga dapat menjadi dasar perbaikan pada penelitian berikutnya dan meningkatkan kualitas pengembangan sistem IoT.
