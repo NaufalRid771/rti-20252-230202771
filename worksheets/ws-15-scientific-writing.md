@@ -84,28 +84,28 @@ Metrik-X     ✗      ✗       ✓ ←     ✗        ✗
 ```
 PAPER STRUCTURE CHECKLIST
 
-Title   : ____________________
-Target  : [ ] Jurnal  [ ] Konferensi  [ ] Laporan
+Title   : Sistem Monitoring Tempat Sampah Pintar Berbasis IoT Menggunakan ESP32, Telegram Bot, dan ThingSpeak  
+Target  : [ ] Jurnal  [ ] Konferensi  [✓] Laporan
 
 Section Check:
-  [ ] Abstract — masalah, metode, hasil utama, kontribusi (max 250 kata)
-  [ ] Introduction — konteks → gap → RQ → kontribusi → struktur paper
-  [ ] Related Work — concept-centric, gap positioning
-  [ ] Method — reproducible: desain, variabel, metrik, setup, prosedur
-  [ ] Results — tabel + grafik + observasi (tanpa interpretasi)
-  [ ] Discussion — interpretasi, perbandingan, implikasi, limitation
-  [ ] Conclusion — jawaban RQ, kontribusi, future work
+  [✓] Abstract — masalah, metode, hasil utama, kontribusi (max 250 kata)
+  [✓] Introduction — konteks → gap → RQ → kontribusi → struktur paper
+  [✓] Related Work — concept-centric, gap positioning
+  [✓] Method — reproducible: desain, variabel, metrik, setup, prosedur
+  [✓] Results — tabel + grafik + observasi (tanpa interpretasi)
+  [✓] Discussion — interpretasi, perbandingan, implikasi, limitation
+  [✓] Conclusion — jawaban RQ, kontribusi, future work
 
 Consistency Matrix:
-  [ ] RQ di Introduction = RQ di Method = RQ di Conclusion
-  [ ] Variabel di Method = variabel di Results
-  [ ] Klaim di Discussion didukung data di Results
-  [ ] Limitasi di Discussion di-address di Conclusion/Future Work
+  [✓] RQ di Introduction = RQ di Method = RQ di Conclusion
+  [✓] Variabel di Method = variabel di Results
+  [✓] Klaim di Discussion didukung data di Results
+  [✓] Limitasi di Discussion di-address di Conclusion/Future Work
 
 Writing Quality:
-  [ ] Clarity — mudah dipahami tanpa re-read
-  [ ] Precision — tidak ada istilah ambigu
-  [ ] Conciseness — tidak ada kalimat redundan
+  [✓] Clarity — mudah dipahami tanpa re-read
+  [✓] Precision — tidak ada istilah ambigu
+  [✓] Conciseness — tidak ada kalimat redundan
 ```
 
 ---
@@ -116,13 +116,13 @@ Buat outline paper untuk riset Anda menggunakan struktur IMRAD.
 
 | Section | Konten Utama (2-3 kalimat) | Target Kata |
 |---------|---------------------------|------------|
-| Abstract | *Contoh: Sistem rekomendasi memiliki akurasi tinggi tapi satisfaction rendah. Studi ini menguji CF+context signal. Hasil: satisfaction naik 38% tanpa penurunan RMSE signifikan.* | 200-250 |
-| Introduction | *Contoh: Konteks: gap antara akurasi dan kepuasan pengguna. Gap: tidak ada studi yang mengkombinasikan CF+context. RQ: apakah CF+context meningkatkan satisfaction?* | 500-700 |
-| Related Work | | 700-1000 |
-| Method | | 800-1200 |
-| Results | | 500-800 |
-| Discussion | | 600-900 |
-| Conclusion | | 200-400 |
+| Abstract | Penelitian ini mengembangkan sistem monitoring tempat sampah pintar berbasis ESP32 menggunakan limit switch sebagai pendeteksi kondisi penuh. Sistem mengirimkan notifikasi melalui Telegram dan menyimpan data ke ThingSpeak sehingga monitoring dapat dilakukan secara real-time. | 200-250 |
+| Introduction | Pengelolaan tempat sampah masih banyak dilakukan secara manual sehingga petugas sering terlambat mengetahui kondisi tempat sampah. Penelitian ini menawarkan sistem monitoring berbasis IoT untuk mendeteksi kondisi tempat sampah dan mengirimkan informasi secara otomatis. | 500-700 |
+| Related Work | Membahas penelitian sebelumnya mengenai smart trash bin, penggunaan ESP32, Telegram Bot, ThingSpeak, serta keterbatasan sistem monitoring yang ada sehingga diperoleh research gap penelitian. | 700-1000 |
+| Method | Menjelaskan perancangan perangkat keras dan perangkat lunak, konfigurasi ESP32, limit switch, servo, Telegram Bot, ThingSpeak, serta prosedur pengujian setiap skenario. | 800-1200 |
+| Results | Menyajikan hasil pengujian berupa keberhasilan deteksi sensor, respon servo, pengiriman notifikasi Telegram, serta pencatatan data pada ThingSpeak dalam bentuk tabel dan grafik. | 500-800 |
+| Discussion | Menjelaskan makna hasil pengujian, kelebihan dan keterbatasan sistem, serta membandingkan hasil penelitian dengan penelitian terdahulu. | 600-900 |
+| Conclusion | Menyimpulkan bahwa sistem berhasil melakukan monitoring kondisi tempat sampah secara otomatis menggunakan ESP32 serta memberikan rekomendasi pengembangan pada penelitian selanjutnya. | 200-400 |
 
 ---
 
@@ -132,22 +132,22 @@ Buat consistency matrix untuk memverifikasi internal consistency paper Anda.
 
 |  | Intro | Method | Result | Discussion | Conclusion |
 |--|-------|--------|--------|-----------|-----------|
-| *Contoh: RQ1* | *✓* | *✓* | *✓* | *✓* | *✓* |
-| *Contoh: Metrik-X* | *✗ ←* | *✗ ←* | *✓* | *✗ ←* | *✗ ←* |
-| RQ1 | | | | | |
-| RQ2 | | | | | |
-| Metrik utama | | | | | |
-| Variabel IV | | | | | |
-| Variabel DV | | | | | |
-| Klaim/kontribusi | | | | | |
+| *Contoh: RQ1* | ✓ | ✓ | ✓ | ✓ | ✓ |
+| *Contoh: Metrik-X* | ✓ | ✓ | ✓ | ✓ | ✓ |
+| RQ1 | ✓ | ✓ | ✓ | ✓ | ✓ |
+| RQ2 | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Metrik utama | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Variabel IV  | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Variabel DV   | ✓| ✓ | ✓ | ✓ | ✓ |
+| Klaim/kontribusi | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 **Isi setiap sel:** ✓ (ada & konsisten), ✗ (missing), ~ (ada tapi inkonsisten)
 
-**Inkonsistensi yang ditemukan:**
-> ___________________________________________________
+**Inkonsistensi yang ditemukan**:
+> Tidak ditemukan inkonsistensi. Seluruh research question, variabel, metode, hasil, dan kontribusi telah konsisten pada setiap bagian paper.
 
-**Tindakan perbaikan:**
-> ___________________________________________________
+**Tindakan perbaikan**:
+> Memastikan seluruh hasil pengujian yang ditampilkan pada bagian Results dibahas kembali pada bagian Discussion dan diringkas pada bagian Conclusion sehingga alur penulisan tetap konsisten.
 
 ---
 
@@ -156,16 +156,16 @@ Buat consistency matrix untuk memverifikasi internal consistency paper Anda.
 Ambil satu paragraf dari tulisan Anda (atau tulis paragraf baru) dan evaluasi kualitasnya.
 
 **Paragraf asli:**
-> (tempel paragraf Anda di sini)
+> (Sistem monitoring tempat sampah pintar menggunakan ESP32 dibuat untuk membantu pengguna mengetahui kondisi tempat sampah. Sistem menggunakan limit switch sebagai sensor, servo sebagai aktuator, Telegram sebagai media notifikasi, dan ThingSpeak sebagai media monitoring data.)
 
 | Kriteria | Evaluasi | Perbaikan |
 |----------|---------|-----------|
-| Clarity | *Contoh: kalimat ke-3 ambigu — "performa" bisa berarti accuracy atau speed* | *Ubah menjadi: "accuracy meningkat..."* |
-| Precision | | |
-| Conciseness | | |
+| Clarity | Alur kerja sistem belum dijelaskan secara runtut.| Menjelaskan urutan proses mulai dari deteksi sensor hingga pengiriman notifikasi.|
+| Precision |Istilah "membantu pengguna" masih terlalu umum.|Diganti menjadi "memantau kondisi tempat sampah secara otomatis dan real-time". |
+| Conciseness |Masih terdapat kalimat yang dapat dipadatkan. |Menggabungkan informasi yang memiliki makna serupa agar lebih ringkas. |
 
 **Paragraf setelah perbaikan:**
-> (tulis paragraf yang sudah diperbaiki)
+> (Sistem monitoring tempat sampah pintar berbasis ESP32 menggunakan limit switch untuk mendeteksi kondisi tempat sampah. Ketika sensor mendeteksi kondisi penuh, ESP32 menggerakkan servo, mengirimkan notifikasi melalui Telegram, dan menyimpan status ke ThingSpeak sehingga kondisi tempat sampah dapat dipantau secara otomatis dan real-time.)
 
 ---
 
@@ -173,5 +173,5 @@ Ambil satu paragraf dari tulisan Anda (atau tulis paragraf baru) dan evaluasi ku
 
 > Apa perbedaan antara menulis "tentang" riset dan menulis sebagai "argumen" riset? Bagaimana urutan penulisan (Method → Discussion → Introduction) mengubah kualitas tulisan?
 
-> ___________________________________________________
-> ___________________________________________________
+> Menulis tentang riset hanya menjelaskan proses yang dilakukan selama penelitian, sedangkan menulis sebagai argumen riset menyusun hubungan logis antara masalah, metode, hasil, dan kontribusi penelitian sehingga pembaca memahami alasan mengapa penelitian dilakukan dan apa manfaat temuannya.
+> Menulis dimulai dari Method, kemudian Results dan Discussion, lalu Introduction, membuat isi paper lebih konsisten karena latar belakang dan tujuan penelitian disusun berdasarkan hasil eksperimen yang telah diperoleh. Dengan demikian, setiap bagian saling mendukung dan menjawab research question secara utuh.
